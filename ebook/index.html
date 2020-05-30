@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <title>innerHTML</title>
+</head>
+<body>
+        <input id="new-Item" type="text" name="">
+        <button id="addButton">Add</button>
+        <ul id="todolist">      
+        </ul>
+
+        <p id="count"></p>
+        <button onclick="fun()">count</button>
+        
+        <script type="text/javascript">
+                var storageKey = 'ArrayTodoList';
+                var dataString = localStorage.getItem(storageKey);
+                var ArrayTodoList;
+                if (dataString){
+                        ArrayTodoList = JSON.parse(dataString);
+                }
+                else{
+                        ArrayTodoList = [
+                                'Thu 2',
+                                'Thu 3',
+                                'Thu 4',
+                                'Thu 5',
+                                'Thu 6',
+                                'Thu 7',
+                                'Chu Nhat'
+                        ];
+                }
+                let addBtn = document.getElementById('addButton');
+                let item = document.getElementById('new-Item');
+                item.addEventListener('change', updateSessionStorage);
+                function updateSessionStorage(){
+                        sessionStorage.setItem('draft', item.value);
+
+                }
+                item.value = sessionStorage.getItem('draft');
+                //addBtn.onclick = addItem;
+                addBtn.addEventListener('click', addItem);
+                function addItem(){
+                        
+                        let ContentItem = item.value;
+                        ArrayTodoList.push(ContentItem);
+                        Render();
+                        item.value = ''; 
+                        localStorage.setItem(storageKey, JSON.stringify(ArrayTodoList));
+                }
+
+                function Render(){
+                        var listLi = document.getElementById('todolist');
+                        var content = ArrayTodoList.map(function(item){
+                                return '<li>' + item + '</li>';
+                        })
+                        listLi.innerHTML = content.join('');
+                }
+                Render();
+                var count = 0;
+                var counter = document.getElementById('count');
+
+                // Tạo 1 button mới nằm dưới p
+                // Viết code sao cho khi click button đó thì giá trị biến `count` tăng 1 đơn vị và nội dung của `counter` cũng thay đổi theo`
+                function fun(){
+                        count +=1;
+                        counter.innerHTML = count;
+                }
+        </script>
+</body>
+</html>

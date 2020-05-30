@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>chang event</title>
+</head>
+<body>
+	<p>Age:</p>
+	<select id="age-select">
+		<option>12</option>
+		<option>13</option>
+		<option>14</option>
+		<option>15</option>
+	</select>
+	<table id="students-table"></table>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script type="text/javascript">
+		var url = 'https://randomuser.me/api/';
+		axios.get(url).then(function(res){
+			var item = res.data;
+			console.log(item);
+			Render1(item);
+		});
+		// var students = [
+		// 	{name: 'Trung anh', age: 12},
+		// 	{name: 'Tai', age: 13},
+		// 	{name: 'Thang', age: 14},
+		// 	{name: 'Trung', age: 15},
+		// 	{name: 'Viet', age: 12}
+		// ];
+		// var ageTable = document.getElementById('age-select');
+		// ageTable.addEventListener('change', ageFilter);
+		// function ageFilter(){
+		// 	let	valueAge = parseInt(ageTable.value);
+		// 	let arrReturn = students.filter(function(student){
+		// 		return student.age === valueAge;
+		// 	});
+		// 	Render(arrReturn);
+		// }
+		// function Render(students){
+		// 	var studenttable = document.getElementById('students-table');
+		// 	var content = students.map(function(student){
+		// 		return '<tr>'+ '<td>' + student.name + '</td><td>' + student.age + '</td>' + '</tr>';
+		// 	})
+		// 	studenttable.innerHTML = content.join('');
+		// }
+		//Render(students);
+		function Render1(items){
+			let list = document.getElementById('students-table');
+			console.log(items.results);
+			let content = '<li>' + items.results + '</li>';
+			
+			list.innerHTML = content.join('');
+		}
+	</script>
+</body>
+</html>

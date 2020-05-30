@@ -1,0 +1,4 @@
+hello
+xin chao
+ni hao
+hello, World
